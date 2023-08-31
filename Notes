@@ -1,0 +1,31 @@
+
+
+To generate SSL certificate follow below
+
+
+
+G:\Quarkus\demo-quarkus\demo-quarkus>keytool -genkey -alias baeldung -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore baeldung.p12 -validity 3650 -ext san=dns:localhost
+Enter keystore password:
+Re-enter new password:
+Enter the distinguished name. Provide a single dot (.) to leave a sub-component empty or press ENTER to use the def
+ault value in braces.
+What is your first and last name?
+  [Unknown]:  Prasad Badwar
+What is the name of your organizational unit?
+  [Unknown]:  HDFC Bank
+What is the name of your organization?
+  [Unknown]:  HDFC
+What is the name of your City or Locality?
+  [Unknown]:  Mumbai
+What is the name of your State or Province?
+  [Unknown]:  Maharashtra
+What is the two-letter country code for this unit?
+  [Unknown]:  IN
+Is CN=Prasad Badwar, OU=HDFC Bank, O=HDFC, L=Mumbai, ST=Maharashtra, C=IN correct?
+  [no]:  yes
+
+Generating 2,048 bit RSA key pair and self-signed certificate (SHA384withRSA) with a validity of 3,650 days
+        for: CN=Prasad Badwar, OU=HDFC Bank, O=HDFC, L=Mumbai, ST=Maharashtra, C=IN
+
+G:\Quarkus\demo-quarkus\demo-quarkus>
+
