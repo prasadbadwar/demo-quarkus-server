@@ -5,23 +5,23 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: hdfcems-k8s
+      app: demo-quarkus-server-k8s
   replicas: 3 # Number of replicas that will be created for this deployment
   template:
     metadata:
       labels:
-        app: demo_quarkus_server-k8s
+        app: demo-quarkus-server-k8s
     spec:
       containers:
-        - name: demo_quarkus_server-k8s
-          image: prasadbadwar/demo_quarkus_server # Image that will be used to containers in the cluster
+        - name: demo-quarkus-server-k8s
+          image: prasadbadwar/demo-quarkus-server-jvm # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8282 # The port that the container is running on in the cluster
 
           env:   
             - name: DB_HOST   
-              value: postgresql
+              value: demo-quarkus-server-k8ssvc
             - name: DB_NAME  
               value: quarkus           
             - name: DB_USERNAME  
@@ -34,10 +34,10 @@ spec:
 apiVersion: v1 # Kubernetes API version
 kind: Service # Kubernetes resource kind we are creating
 metadata: # Metadata of the resource kind we are creating
-  name: demo_quarkus_server-k8ssvc
+  name: demo-quarkus-server-k8ssvc
 spec:
   selector:
-    app: demo_quarkus_server-k8s
+    app: demo-quarkus-server-k8s
   ports:
     - protocol: "TCP"
       port: 8282 # The port that the service is running on in the cluster
