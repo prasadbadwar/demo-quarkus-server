@@ -1,45 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment # Kubernetes resource kind we are creating
 metadata:
-  name: demo-quarkus-server
+  name: book-keycloak-quarkus
 spec:
   selector:
     matchLabels:
-      app: demo-quarkus-server-k8s
+      app: book-keycloak-quarkus-k8s
   replicas: 3 # Number of replicas that will be created for this deployment
   template:
     metadata:
       labels:
-        app: demo-quarkus-server-k8s
+        app: book-keycloak-quarkus-k8s
     spec:
       containers:
-        - name: demo-quarkus-server-k8s
-          image: prasadbadwar/demo-quarkus-server-jvm # Image that will be used to containers in the cluster
+        - name: book-keycloak-quarkus-k8s
+          image: prasadbadwar/book-keycloak-quarkus # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8282 # The port that the container is running on in the cluster
+            - containerPort: 8181 # The port that the container is running on in the cluster
 
           env:   
             - name: DB_HOST   
-              value: demo-quarkus-server-k8ssvc
+              value: mysql
             - name: DB_NAME  
-              value: quarkus           
+              value: library          
             - name: DB_USERNAME  
-              value: postgres              
+              value: root              
             - name: DB_PASSWORD 
-              value: root       
+              value: root          
 
 ---
 
 apiVersion: v1 # Kubernetes API version
 kind: Service # Kubernetes resource kind we are creating
 metadata: # Metadata of the resource kind we are creating
-  name: demo-quarkus-server-k8ssvc
+  name: book-keycloak-quarkus-k8ssvc
 spec:
   selector:
-    app: demo-quarkus-server-k8s
+    app: book-keycloak-quarkus-k8s
   ports:
     - protocol: "TCP"
-      port: 8282 # The port that the service is running on in the cluster
-      targetPort: 8282 # The port exposed by the service
+      port: 8181 # The port that the service is running on in the cluster
+      targetPort: 8181 # The port exposed by the service
   type: NodePort # type of the service.

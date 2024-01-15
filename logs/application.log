@@ -1,0 +1,5 @@
+11:37:42 INFO  [quarkus] demo-quarkus 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.2.4.Final) started in 2.744s. Listening on: http://localhost:8181
+11:37:42 INFO  [quarkus] Profile dev activated. Live Coding activated.
+11:37:42 INFO  [quarkus] Installed features: [agroal, cdi, hibernate-orm, hibernate-orm-panache, jdbc-mysql, jdbc-postgresql, keycloak-authorization, narayana-jta, oidc, oidc-client, resteasy, resteasy-jsonb, security, smallrye-context-propagation, smallrye-openapi, swagger-ui, vertx]
+11:37:42 INFO  [RuntimeUpdatesProcessor] Live reload total time: 9.304s 
+11:37:42 INFO  [RuntimeUpdatesProcessor] Live reload took more than 4 seconds, you may want to enable instrumentation based reload (quarkus.live-reload.instrumentation=true). This allows small changes to take effect without restarting Quarkus.

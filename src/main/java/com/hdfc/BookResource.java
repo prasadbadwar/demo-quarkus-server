@@ -2,12 +2,15 @@ package com.hdfc;
 
 
 import java.util.List;
-import java.util.Objects;
+
+import org.jboss.logging.Logger;
 
 import com.hdfc.entity.Book;
 import com.hdfc.exception.BookNotFoundExp;
 import com.hdfc.service.IBookservice;
 
+import io.quarkus.security.identity.SecurityIdentity;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -27,10 +30,17 @@ public class BookResource {
 	
 	@Inject
 	IBookservice bookservice;
+	@Inject
+	SecurityIdentity identity;
+	
+	
+	private static final Logger log=Logger.getLogger(BookResource.class);
 	
 	@GET
+	@RolesAllowed({"viewer","admin"})
 	@Path("/book") // book
 	public List<Book>getAllBooks(){
+		log.info(identity.getPrincipal().getName()+" is accessing list of books");
 		return bookservice.getAllBook();
 	}
 	
@@ -42,6 +52,7 @@ public class BookResource {
 	
 	@PUT
 	@Path("/book/{id}") //book
+	
 	public Book updateBook(@PathParam("id") long id,Book b) throws BookNotFoundExp {
 		return bookservice.updateBook(id,b);
 	}
@@ -56,7 +67,9 @@ public class BookResource {
 	
 	@GET
 	@Path("/book/{id}") //book/id
+	@RolesAllowed("viewer")
 	public Book getByID(@PathParam("id") long id)  throws BookNotFoundExp {
+		log.info("Displaying information of Book ID: "+id);
 		return bookservice.getByID(id);
 		
 	}
